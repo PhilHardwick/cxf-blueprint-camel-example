@@ -6,13 +6,13 @@
            xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
        http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
-    <cm:property-placeholder persistent-id="com.capgemini.example" update-strategy="none">
+    <cm:property-placeholder persistent-id="com.capgemini.example" update-strategy="reload">
         <cm:default-properties>
             <!-- Endpoints -->
             <cm:property name="restEndpoint" value="cxfrs:bean:blogServiceServer?bindingStyle=SimpleConsumer"/>
 
             <!-- Service URL-->
-            <cm:property name="api.root.url" value="/api"/>
+            <cm:property name="apiRootUrl" value="/api"/>
         </cm:default-properties>
     </cm:property-placeholder>
 
@@ -25,7 +25,7 @@
     </bean>
 
     <!-- CXF servers -->
-    <camel-cxf:rsServer id="blogServiceServer" address="${api.root.url}/1/blog"
+    <camel-cxf:rsServer id="blogServiceServer" address="${apiRootUrl}/1/blog"
                         loggingFeatureEnabled="false">
         <camel-cxf:serviceBeans>
             <bean class="com.capgemini.example.api.resources.BlogPost"/>
